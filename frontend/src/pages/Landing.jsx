@@ -1,11 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
-useEffect(() => {
-  // wake up backend on landing page load
-  fetch(`${import.meta.env.VITE_API_URL || "https://flashmind-backend-be1g.onrender.com"}/`)
-    .catch(() => {}) // silently fail
-}, [])
+
 const FEATURES = [
   {
     emoji: "🧠",
@@ -62,6 +58,12 @@ const STATS = [
 export default function Landing() {
   const navigate = useNavigate()
   const [scrolled, setScrolled] = useState(false)
+
+  // wake up backend ← ADD HERE inside component
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL || "https://flashmind-backend-be1g.onrender.com"}/`)
+      .catch(() => {})
+  }, [])  
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20)
