@@ -1,6 +1,11 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
+useEffect(() => {
+  // wake up backend on landing page load
+  fetch(`${import.meta.env.VITE_API_URL || "https://flashmind-backend-be1g.onrender.com"}/`)
+    .catch(() => {}) // silently fail
+}, [])
 const FEATURES = [
   {
     emoji: "🧠",
