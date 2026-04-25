@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const BASE = "http://localhost:8000"
+const BASE = import.meta.env.VITE_API_URL || "https://flashmind-backend-be1g.onrender.com"
 
 const api = axios.create({ baseURL: BASE })
 
