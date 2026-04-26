@@ -25,19 +25,28 @@ export default function DeckCard({ deck, onDelete }) {
   }
 
   return (
-    <div style={{
-      background: "var(--surface)",
-      border: `1.5px solid ${confirming ? "#f87171" : "var(--border)"}`,
+    <div className="glass-panel hover-lift" style={{
+      border: `1px solid ${confirming ? "#f87171" : "var(--border)"}`,
       borderRadius: "var(--radius)",
-      padding: "24px",
+      padding: "28px",
       display: "flex",
       flexDirection: "column",
-      gap: 16,
-      transition: "border-color 0.2s",
+      gap: 18,
+      transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
       position: "relative",
     }}
-      onMouseEnter={e => { if (!confirming) e.currentTarget.style.borderColor = "var(--primary)" }}
-      onMouseLeave={e => { if (!confirming) e.currentTarget.style.borderColor = "var(--border)" }}
+      onMouseEnter={e => { 
+        if (!confirming) {
+            e.currentTarget.style.borderColor = "var(--primary)";
+            e.currentTarget.style.boxShadow = "0 10px 40px rgba(0,0,0,0.5)";
+        }
+      }}
+      onMouseLeave={e => { 
+        if (!confirming) {
+            e.currentTarget.style.borderColor = "var(--border)";
+            e.currentTarget.style.boxShadow = "none";
+        }
+      }}
     >
           {/* delete button top right */}
           <button
@@ -172,53 +181,58 @@ export default function DeckCard({ deck, onDelete }) {
       </div>
 
       {/* action buttons */}
-      <div style={{ display: "flex", gap: 10, marginTop: 4 }}>
+      <div className="button-row deck-actions" style={{ display: "flex", gap: 10, marginTop: 4 }}>
         {deck.due_cards > 0 ? (
           <button
+            className="pill-btn hover-lift"
             onClick={() => navigate(`/review/${deck.id}`)}
             style={{
               flex: 1,
               padding: "10px 0",
-              borderRadius: 8,
               background: "var(--primary)",
-              color: "#fff",
-              fontWeight: 600,
+              color: "#000",
+              fontWeight: 800,
               fontSize: 14,
-              cursor: "pointer",
-              border: "none",
+              boxShadow: "0 4px 14px rgba(249, 168, 37, 0.4)",
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = "var(--primary-hover)";
+              e.currentTarget.style.boxShadow = "0 6px 20px rgba(249, 168, 37, 0.6)";
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = "var(--primary)";
+              e.currentTarget.style.boxShadow = "0 4px 14px rgba(249, 168, 37, 0.4)";
             }}
           >
             Study ({deck.due_cards} due)
           </button>
         ) : (
           <button
+            className="pill-btn hover-lift"
             onClick={() => navigate(`/review/${deck.id}?mode=all`)}
             style={{
               flex: 1,
               padding: "10px 0",
-              borderRadius: 8,
               background: "var(--surface2)",
               color: "var(--primary)",
-              fontWeight: 600,
+              fontWeight: 700,
               fontSize: 14,
-              cursor: "pointer",
-              border: "1.5px solid var(--primary)",
+              border: "1px solid var(--primary)",
             }}
           >
             Practice All Cards
           </button>
         )}
         <button
+          className="pill-btn hover-lift"
           onClick={() => navigate(`/progress/${deck.id}`)}
           style={{
-            padding: "10px 16px",
-            borderRadius: 8,
+            padding: "10px 20px",
             background: "var(--surface2)",
             color: "var(--text-muted)",
-            fontWeight: 600,
+            fontWeight: 700,
             fontSize: 14,
             border: "1px solid var(--border)",
-            cursor: "pointer",
           }}
         >
           Stats

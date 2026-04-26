@@ -520,13 +520,15 @@ export default function Review() {
         <div style={{ minHeight: "100vh", background: "var(--bg)" }}>
 
             {/* top bar */}
-            <div style={{
+            <div className="review-topbar glass-panel" style={{
                 padding: "12px 24px",
                 borderBottom: "1px solid var(--border)",
-                background: "var(--surface)",
                 display: "flex",
                 alignItems: "center",
                 gap: 16,
+                position: "sticky",
+                top: 0,
+                zIndex: 10,
             }}>
                 <button
                     onClick={() => navigate("/")}

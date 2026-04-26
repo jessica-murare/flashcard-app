@@ -61,7 +61,7 @@ export default function HelpDialog({
           style={{
             position: "fixed",
             inset: 0,
-            background: "rgba(8, 8, 12, 0.72)",
+            background: "var(--overlay)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",

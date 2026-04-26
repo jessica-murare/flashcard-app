@@ -5,19 +5,24 @@
 }
 
 :root {
-  --bg: #0f0f13;
-  --surface: #1a1a24;
-  --surface2: #22222f;
-  --border: #2e2e3e;
+  color-scheme: dark;
+  --bg: #0b0b0e;
+  --surface: rgba(26, 26, 36, 0.65);
+  --surface2: rgba(34, 34, 47, 0.65);
+  --border: rgba(255, 255, 255, 0.06);
   --primary: #F9A825;        /* Cuemath yellow */
   --primary-hover: #F57F17;  /* darker yellow */
   --success: #4ade80;
   --warning: #facc15;
   --danger: #f87171;
   --text: #f0f0f5;
-  --text-muted: #8888a8;
-  --radius: 12px;
+  --text-muted: #8a8a9e;
+  --nav-bg: rgba(11, 11, 14, 0.75);
+  --overlay: rgba(8, 8, 12, 0.85);
+  --surface-overlay: rgba(15, 15, 19, 0.95);
+  --radius: 20px;
 }
+
 
 body {
   background: var(--bg);
@@ -25,6 +30,7 @@ body {
   font-family: 'Inter', system-ui, sans-serif;
   min-height: 100vh;
   line-height: 1.6;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 button {
@@ -32,7 +38,24 @@ button {
   border: none;
   outline: none;
   font-family: inherit;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.pill-btn {
+  border-radius: 999px;
+}
+
+.glass-panel {
+  background: var(--surface);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+/* subtle hover transform utility */
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
 
 a {
   text-decoration: none;
@@ -75,7 +98,7 @@ a {
   min-height: 260px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  border-radius: 12px;
+  border-radius: var(--radius);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,4 +109,193 @@ a {
 
 .card-face.back {
   transform: rotateY(180deg);
+}
+
+@media (max-width: 700px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .app-nav {
+    min-height: 64px !important;
+    height: auto !important;
+    padding: 10px 16px !important;
+    gap: 10px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .landing-nav {
+    align-items: center !important;
+  }
+
+  .nav-actions {
+    gap: 8px !important;
+  }
+
+  .nav-actions button {
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+  }
+
+  .dashboard-actions {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+
+  .dashboard-actions > div {
+    padding: 5px 10px !important;
+  }
+
+  .dashboard-actions > div > div {
+    width: 44px !important;
+  }
+
+  .page-main,
+  .dashboard-main,
+  .progress-main {
+    width: 100% !important;
+    padding: 24px 16px !important;
+  }
+
+  .page-section {
+    padding: 56px 16px !important;
+  }
+
+  .landing-hero {
+    min-height: auto !important;
+    padding: 104px 16px 48px !important;
+  }
+
+  .hero-glow {
+    width: 320px !important;
+    height: 320px !important;
+  }
+
+  .hero-actions,
+  .button-row,
+  .rate-buttons {
+    width: 100% !important;
+    flex-direction: column !important;
+  }
+
+  .hero-actions button,
+  .button-row button,
+  .rate-buttons button {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .landing-stats {
+    border-radius: 12px !important;
+  }
+
+  .landing-stats > div {
+    min-width: 50% !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+
+  .responsive-grid,
+  .steps-grid,
+  .features-grid,
+  .stats-grid,
+  .deck-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .science-cards {
+    flex-direction: column !important;
+  }
+
+  .science-cards > div {
+    max-width: none !important;
+  }
+
+  .app-footer {
+    padding: 20px 16px !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .panel-card,
+  .upload-card {
+    padding: 24px 18px !important;
+    max-width: 100% !important;
+  }
+
+  .review-topbar {
+    padding: 10px 12px !important;
+    gap: 10px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .review-progress-bar {
+    order: 5 !important;
+    flex-basis: 100% !important;
+  }
+
+  .review-topbar > span {
+    margin-left: auto !important;
+  }
+
+  .xp-mini-bar {
+    display: none !important;
+  }
+
+  .review-card-area {
+    padding: 28px 14px 88px !important;
+  }
+
+  .floating-add-card {
+    right: 16px !important;
+    bottom: 16px !important;
+  }
+
+  .add-card-panel {
+    max-height: calc(100vh - 32px) !important;
+    overflow-y: auto !important;
+    padding: 22px !important;
+  }
+
+  .card-scene,
+  .card-inner,
+  .card-face {
+    min-height: 300px !important;
+  }
+
+  .card-face {
+    padding: 44px 22px 28px !important;
+  }
+
+  .card-face p {
+    font-size: 16px !important;
+    overflow-wrap: anywhere !important;
+  }
+
+
+}
+
+@media (max-width: 420px) {
+  .landing-stats > div {
+    min-width: 100% !important;
+  }
+
+  .app-nav > span {
+    font-size: 18px !important;
+  }
+
+  .nav-actions {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+
+  .nav-actions button {
+    flex: 1 !important;
+  }
+
+  .progress-nav button,
+  .progress-nav span {
+    font-size: 12px !important;
+  }
 }

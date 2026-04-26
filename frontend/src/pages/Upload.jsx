@@ -436,21 +436,20 @@ const cardStyle = {
 
 const primaryBtn = {
   background: "var(--primary)",
-  color: "#fff",
+  color: "#000",
   padding: "13px 24px",
-  borderRadius: 8,
-  fontWeight: 700,
+  fontWeight: 800,
   fontSize: 15,
   border: "none",
   cursor: "pointer",
+  boxShadow: "0 4px 14px rgba(249, 168, 37, 0.4)",
 }
 
 const secondaryBtn = {
   background: "var(--surface2)",
   color: "var(--text-muted)",
   padding: "13px 24px",
-  borderRadius: 8,
-  fontWeight: 600,
+  fontWeight: 700,
   fontSize: 15,
   border: "1px solid var(--border)",
   cursor: "pointer",

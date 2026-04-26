@@ -134,13 +134,13 @@ export default function Progress() {
         </div>
 
         {/* mastery percent hero */}
-        <div style={{
-          background: "var(--surface)",
+        <div className="glass-panel hover-lift" style={{
           border: "1px solid var(--border)",
           borderRadius: "var(--radius)",
           padding: "32px",
           marginBottom: 20,
           textAlign: "center",
+          transition: "transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s",
         }}>
           <div style={{
             fontSize: 64,
@@ -168,18 +168,20 @@ export default function Progress() {
         {/* bucket breakdown */}
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           {buckets.map(b => (
-            <div
-              key={b.label}
-              style={{
-                background: b.bg,
-                border: `1px solid ${b.color}33`,
-                borderRadius: "var(--radius)",
-                padding: "16px 20px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
+              <div
+                key={b.label}
+                className="hover-lift"
+                style={{
+                  background: b.bg,
+                  border: `1px solid ${b.color}33`,
+                  borderRadius: "var(--radius)",
+                  padding: "16px 20px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  transition: "transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
+                }}
+              >
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 <div style={{
                   width: 10,
@@ -210,12 +212,14 @@ export default function Progress() {
         {/* bottom cta */}
         <div style={{ marginTop: 32, display: "flex", gap: 12 }}>
                   <button
+                      className="pill-btn hover-lift"
                       onClick={() => navigate(`/review/${deckId}?mode=all`)}
                       style={{ ...primaryBtn, flex: 2 }}
                   >
                       Continue Studying →
                   </button>
           <button
+            className="pill-btn hover-lift"
             onClick={() => navigate("/")}
             style={{ ...ghostBtn, flex: 1 }}
           >
@@ -241,21 +245,20 @@ const centerPage = {
 
 const primaryBtn = {
   background: "var(--primary)",
-  color: "#fff",
+  color: "#000",
   padding: "13px 20px",
-  borderRadius: 8,
-  fontWeight: 700,
+  fontWeight: 800,
   fontSize: 14,
   border: "none",
   cursor: "pointer",
+  boxShadow: "0 4px 14px rgba(249, 168, 37, 0.4)",
 }
 
 const ghostBtn = {
   background: "var(--surface2)",
   color: "var(--text-muted)",
   padding: "13px 20px",
-  borderRadius: 8,
-  fontWeight: 600,
+  fontWeight: 700,
   fontSize: 14,
   border: "1px solid var(--border)",
   cursor: "pointer",

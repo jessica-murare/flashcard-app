@@ -468,26 +468,32 @@ export default function FlashCard({ card, onRate, onCardUpdate, disableShortcuts
 function RateButton({ label, sub, color, onClick }) {
   return (
     <button
+      className="pill-btn hover-lift"
       onClick={onClick}
       style={{
         flex: 1,
         maxWidth: 160,
         padding: "12px 8px",
-        borderRadius: "var(--radius)",
         background: "var(--surface)",
         border: `1.5px solid ${color}`,
         color: color,
-        fontWeight: 600,
+        fontWeight: 700,
         fontSize: 15,
-        transition: "background 0.2s",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         gap: 2,
         cursor: "pointer",
+        transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
       }}
-      onMouseEnter={e => e.currentTarget.style.background = "var(--surface2)"}
-      onMouseLeave={e => e.currentTarget.style.background = "var(--surface)"}
+      onMouseEnter={e => {
+          e.currentTarget.style.background = `${color}22`
+          e.currentTarget.style.boxShadow = `0 4px 14px ${color}44`
+      }}
+      onMouseLeave={e => {
+          e.currentTarget.style.background = "var(--surface)"
+          e.currentTarget.style.boxShadow = "none"
+      }}
     >
       {label}
       <span style={{ fontSize: 11, color: "var(--text-muted)", fontWeight: 400 }}>{sub}</span>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { listDecks } from "../api.js"
 import DeckCard from "../components/DeckCard.jsx"
-import HelpDialog from "../components/HelpDialog.jsx"
+
 import { scheduleDailyReminder, checkAndNotify } from "../notifications.js"
 
 // ── streak + daily goal helpers ───────────────────────────────────
@@ -107,14 +107,13 @@ export default function Dashboard() {
     <div style={{ minHeight: "100vh", background: "var(--bg)" }}>
 
       {/* navbar */}
-      <nav style={{
+      <nav className="app-nav dashboard-nav glass-panel" style={{
         padding: "0 32px",
         height: 64,
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
         borderBottom: "1px solid var(--border)",
-        background: "var(--surface)",
         position: "sticky",
         top: 0,
         zIndex: 10,
@@ -122,22 +121,8 @@ export default function Dashboard() {
         <span style={{ fontWeight: 800, fontSize: 20, color: "var(--primary)" }}>
           ⚡ FlashMind
         </span>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <HelpDialog
-            title="How the dashboard works"
-            description="This is your home screen for creating decks, checking what is due, and jumping back into study sessions."
-            steps={[
-              "Use New Deck to upload a PDF and turn it into flashcards.",
-              "Check the cards due today count to see what needs review right now.",
-              "Open any deck and choose Study to review due cards or Stats to see your progress.",
-            ]}
-            tips={[
-              "Your streak, XP, and daily goal update automatically as you study.",
-              "If you are brand new, start by creating one small deck so you can learn the full flow quickly.",
-            ]}
-            storageKey="flashmind_help_dashboard"
-            autoOpen
-          />
+        <div className="nav-actions dashboard-actions" style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          
           {/* XP pill */}
           <div style={{
             display: "flex",
@@ -169,28 +154,34 @@ export default function Dashboard() {
           </div>
 
           <button
+            className="pill-btn hover-lift"
             onClick={() => navigate("/upload")}
             style={{
               background: "var(--primary)",
-              color: "#fff",
-              padding: "9px 20px",
-              borderRadius: 8,
-              fontWeight: 600,
+              color: "#000",
+              boxShadow: "0 4px 14px rgba(249, 168, 37, 0.4)",
+              padding: "9px 24px",
+              fontWeight: 800,
               fontSize: 14,
-              transition: "background 0.2s",
             }}
-            onMouseEnter={e => e.currentTarget.style.background = "var(--primary-hover)"}
-            onMouseLeave={e => e.currentTarget.style.background = "var(--primary)"}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = "var(--primary-hover)";
+              e.currentTarget.style.boxShadow = "0 6px 20px rgba(249, 168, 37, 0.6)";
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = "var(--primary)";
+              e.currentTarget.style.boxShadow = "0 4px 14px rgba(249, 168, 37, 0.4)";
+            }}
           >
             + New Deck
           </button>
         </div>
       </nav>
 
-      <main style={{ maxWidth: 960, margin: "0 auto", padding: "36px 24px" }}>
+      <main className="page-main dashboard-main" style={{ maxWidth: 960, margin: "0 auto", padding: "36px 24px" }}>
 
         {/* stats row */}
-        <div style={{
+        <div className="responsive-grid stats-grid" style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
           gap: 16,
@@ -282,7 +273,7 @@ export default function Dashboard() {
 
         {/* states */}
         {loading && (
-          <div style={{
+          <div className="responsive-grid deck-grid" style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
             gap: 20,
@@ -314,7 +305,7 @@ export default function Dashboard() {
         )}
 
         {error && (
-          <div style={{
+          <div className="responsive-grid deck-grid" style={{
             background: "#2d1a1a",
             border: "1px solid #f87171",
             color: "#f87171",
@@ -350,7 +341,7 @@ export default function Dashboard() {
         )}
 
         {!loading && decks.length > 0 && (
-          <div style={{
+          <div className="responsive-grid deck-grid" style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
             gap: 20,
@@ -373,15 +364,18 @@ export default function Dashboard() {
 // ── sub components ────────────────────────────────────────────────
 function StatCard({ children }) {
   return (
-    <div style={{
-      background: "var(--surface)",
+    <div className="hover-lift glass-panel" style={{
       border: "1px solid var(--border)",
       borderRadius: "var(--radius)",
       padding: "20px 24px",
       display: "flex",
       alignItems: "center",
       gap: 16,
-    }}>
+      transition: "transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s",
+    }}
+    onMouseEnter={e => e.currentTarget.style.boxShadow = "0 8px 30px rgba(0,0,0,0.4)"}
+    onMouseLeave={e => e.currentTarget.style.boxShadow = "none"}
+    >
       {children}
     </div>
   )
