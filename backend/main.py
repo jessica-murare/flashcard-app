@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from datetime import datetime
 from typing import List
 import os
+from fastapi.responses import Response
 
 from database import engine, get_db, Base
 from models import Deck, Card, Review
@@ -427,6 +428,10 @@ def add_card(deck_id: int, data: dict, db: Session = Depends(get_db)):
     }
 
 # ── Health check ──────────────────────────────────────────────────
-@app.get("/")
+# @app.get("/")
+# def root():
+#     return {"status": "ok", "message": "Flashcard API running"}
+
+@app.api_route("/", methods=["GET", "HEAD"])
 def root():
     return {"status": "ok", "message": "Flashcard API running"}
