@@ -242,13 +242,15 @@ export default function FlashCard({ card, onRate, onCardUpdate, disableShortcuts
 
   // ── normal card ───────────────────────────────
   return (
-    <div style={{ width: "100%", maxWidth: 600, margin: "0 auto", position: "relative" }}>
+    <div style={{ width: "100%", maxWidth: 1000, margin: "0 auto", position: "relative" }}>
+
+
 
       {/* XP pop */}
       {xpPop && (
         <div key={xpPop.key} style={{
           position: "absolute",
-          top: -10,
+          top: 30,
           right: 20,
           color: xpPop.amount >= 10 ? "#4ade80" : xpPop.amount >= 5 ? "#facc15" : "#f87171",
           fontWeight: 900,
@@ -269,7 +271,7 @@ export default function FlashCard({ card, onRate, onCardUpdate, disableShortcuts
       )}
 
       {/* type badge + edit button */}
-      <div style={{ marginBottom: 12, display: "flex", justifyContent: "center", alignItems: "center", gap: 10 }}>
+      <div style={{ marginBottom: 16, display: "flex", justifyContent: "center", alignItems: "center", gap: 10 }}>
         <span style={{
           background: colors.bg,
           border: `1px solid ${colors.border}`,
@@ -300,149 +302,162 @@ export default function FlashCard({ card, onRate, onCardUpdate, disableShortcuts
         </button>
       </div>
 
-{/* card */}
-<div
-  className="card-scene"
-  onClick={handleFlip}
->
-  <div className={`card-inner ${flipped ? "flipped" : ""}`}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 24, width: "100%" }}>
+        {/* Main Card Area */}
+        <div style={{ width: "100%", maxWidth: 740, position: "relative" }}>
+          {/* card */}
+          <div
+            className="card-scene"
+            onClick={handleFlip}
+          >
+            <div className={`card-inner ${flipped ? "flipped" : ""}`}>
 
-    {/* front face */}
-    <div
-      className="card-face front"
-      style={{
-        background: "var(--surface)",
-        border: "1.5px solid var(--border)",
-      }}
-    >
-      <div style={{
-        position: "absolute",
-        top: 14,
-        right: 18,
-        fontSize: 11,
-        color: "var(--text-muted)",
-        letterSpacing: 1,
-        textTransform: "uppercase",
-      }}>
-        Space to flip
-      </div>
-      <p style={{
-        fontSize: 20,
-        fontWeight: 600,
-        lineHeight: 1.7,
-        color: "var(--text)",
-      }}>
-        {card.front}
-      </p>
-    </div>
+              {/* front face */}
+              <div
+                className="card-face front"
+                style={{
+                  background: "var(--surface)",
+                  border: "1.5px solid var(--border)",
+                }}
+              >
+                <div style={{
+                  position: "absolute",
+                  top: 14,
+                  right: 18,
+                  fontSize: 11,
+                  color: "var(--text-muted)",
+                  letterSpacing: 1,
+                  textTransform: "uppercase",
+                }}>
+                  Space to flip
+                </div>
+                <p style={{
+                  fontSize: 24,
+                  fontWeight: 600,
+                  lineHeight: 1.7,
+                  color: "var(--text)",
+                }}>
+                  {card.front}
+                </p>
+              </div>
 
-    {/* back face */}
-    <div
-      className="card-face back"
-      style={{
-        background: colors.bg,
-        border: `1.5px solid ${colors.border}`,
-      }}
-    >
-      <div style={{
-        position: "absolute",
-        top: 14,
-        right: 18,
-        fontSize: 11,
-        color: colors.border,
-        letterSpacing: 1,
-        textTransform: "uppercase",
-        opacity: 0.7,
-      }}>
-        Answer
-      </div>
-      <p style={{
-        fontSize: 16,
-        fontWeight: 400,
-        lineHeight: 1.7,
-        color: "var(--text)",
-      }}>
-        {card.back}
-      </p>
-    </div>
+              {/* back face */}
+              <div
+                className="card-face back"
+                style={{
+                  background: colors.bg,
+                  border: `1.5px solid ${colors.border}`,
+                }}
+              >
+                <div style={{
+                  position: "absolute",
+                  top: 14,
+                  right: 18,
+                  fontSize: 11,
+                  color: colors.border,
+                  letterSpacing: 1,
+                  textTransform: "uppercase",
+                  opacity: 0.7,
+                }}>
+                  Answer
+                </div>
+                <p style={{
+                  fontSize: 18,
+                  fontWeight: 400,
+                  lineHeight: 1.7,
+                  color: "var(--text)",
+                }}>
+                  {card.back}
+                </p>
+              </div>
 
-  </div>
-</div>
+            </div>
+          </div>
 
-      {/* hint */}
-      {!flipped && card.hint && (
-        <div style={{ marginTop: 12, textAlign: "center" }}>
-          {!hintVisible ? (
-            <button
-              onClick={() => setHintVisible(true)}
-              style={{
-                background: "none",
-                color: "var(--text-muted)",
-                fontSize: 13,
-                borderBottom: "1px dashed var(--text-muted)",
-                borderRadius: 0,
-                padding: "2px 0",
-                cursor: "pointer",
-              }}
-            >
-              💡 Show hint
-            </button>
-          ) : (
-            <div style={{
-              background: "#2a1f0f",
-              border: "1px solid #facc1566",
-              borderRadius: 8,
-              padding: "10px 16px",
-              fontSize: 13,
-              color: "#facc15",
-              textAlign: "left",
-            }}>
-              💡 {card.hint}
+          {/* hint */}
+          {!flipped && card.hint && (
+            <div style={{ marginTop: 16, textAlign: "center" }}>
+              {!hintVisible ? (
+                <button
+                  onClick={() => setHintVisible(true)}
+                  style={{
+                    background: "none",
+                    color: "var(--text-muted)",
+                    fontSize: 13,
+                    borderBottom: "1px dashed var(--text-muted)",
+                    borderRadius: 0,
+                    padding: "2px 0",
+                    cursor: "pointer",
+                  }}
+                >
+                  💡 Show hint
+                </button>
+              ) : (
+                <div style={{
+                  background: "#2a1f0f",
+                  border: "1px solid #facc1566",
+                  borderRadius: 8,
+                  padding: "10px 16px",
+                  fontSize: 13,
+                  color: "#facc15",
+                  textAlign: "left",
+                }}>
+                  💡 {card.hint}
+                </div>
+              )}
             </div>
           )}
         </div>
-      )}
 
-      {/* rating buttons */}
-      {flipped && (
-        <div style={{ display: "flex", gap: 12, marginTop: 20, justifyContent: "center" }}>
-          <RateButton label="Again" sub="1 key" color="#f87171" onClick={() => handleRate(1)} />
-          <RateButton label="Hard"  sub="2 key" color="#facc15" onClick={() => handleRate(2)} />
-          <RateButton label="Easy"  sub="3 key" color="#4ade80" onClick={() => handleRate(3)} />
-        </div>
-      )}
+        {/* Bottom Rating Buttons */}
+        {flipped && (
+          <div style={{ display: "flex", gap: 16, width: "100%", maxWidth: 740, justifyContent: "center" }}>
+            <RateButton label="Again" sub="1 key" color="#f87171" onClick={() => handleRate(1)} />
+            <RateButton label="Hard"  sub="2 key" color="#facc15" onClick={() => handleRate(2)} />
+            <RateButton label="Easy"  sub="3 key" color="#4ade80" onClick={() => handleRate(3)} />
+          </div>
+        )}
+      </div>
 
       {/* AI explain */}
       {flipped && (
-        <div style={{ marginTop: 16, textAlign: "center" }}>
+        <div style={{ marginTop: 24, textAlign: "center" }}>
           {!explanation ? (
             <button
+              className="hover-lift"
               onClick={handleExplain}
               disabled={explaining}
               style={{
-                background: "none",
+                background: "var(--surface2)",
                 color: "var(--primary)",
-                fontSize: 13,
-                borderBottom: "1px dashed var(--primary)",
-                borderRadius: 0,
-                padding: "2px 0",
+                fontSize: 14,
+                fontWeight: 600,
+                border: "1px solid var(--primary)",
+                borderRadius: 999,
+                padding: "12px 24px",
                 cursor: explaining ? "not-allowed" : "pointer",
                 opacity: explaining ? 0.6 : 1,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
               }}
             >
-              {explaining ? "Getting explanation..." : "🤖 I don't get it — explain simply"}
+              <span style={{ fontSize: 18 }}>🤖</span>
+              {explaining ? "Getting explanation..." : "I don't get it — explain simply"}
             </button>
           ) : (
             <div style={{
               background: "#1e1b4b",
               border: "1px solid #7c6af766",
               borderRadius: 8,
-              padding: "14px 16px",
-              fontSize: 13,
+              padding: "16px 20px",
+              fontSize: 14,
               color: "var(--text)",
               textAlign: "left",
               lineHeight: 1.7,
-              marginTop: 8,
+              marginTop: 12,
+              maxWidth: 740,
+              margin: "12px auto 0",
             }}>
               🤖 {explanation}
             </div>
@@ -454,8 +469,8 @@ export default function FlashCard({ card, onRate, onCardUpdate, disableShortcuts
       <p style={{
         textAlign: "center",
         color: "var(--text-muted)",
-        fontSize: 11,
-        marginTop: 16,
+        fontSize: 12,
+        marginTop: 20,
         letterSpacing: 0.5,
       }}>
         {flipped ? "Press 1 · 2 · 3 to rate" : "Press Space or Enter to flip"}
@@ -472,13 +487,12 @@ function RateButton({ label, sub, color, onClick }) {
       onClick={onClick}
       style={{
         flex: 1,
-        maxWidth: 160,
-        padding: "12px 8px",
+        padding: "18px 24px",
         background: "var(--surface)",
         border: `1.5px solid ${color}`,
         color: color,
-        fontWeight: 700,
-        fontSize: 15,
+        fontWeight: 800,
+        fontSize: 18,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

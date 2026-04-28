@@ -798,7 +798,7 @@ export default function Review() {
             )}
 
             {/* card area */}
-            <div style={{ maxWidth: 680, margin: "0 auto", padding: "48px 24px" }}>
+            <div style={{ maxWidth: 1000, margin: "0 auto", padding: "48px 24px" }}>
                 <FlashCard
                     key={current.id}
                     card={current}
